@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="header">
+    Admin Dashboard 🧑‍💻
+    <a href="/logout" class="button" style="float:right;">Logout</a>
+    <button onclick="toggleDark()" class="button">🌙 Dark Mode</button>
+</div>
+
+<div class="container">
+
+    <!-- UPLOAD MENU -->
+    <div class="card">
+
+        <h2>Upload Weekly Menu 🍱</h2>
+
+        <form method="POST" action="/upload_menu" enctype="multipart/form-data">
+
+            <input type="file" name="menu_image" required>
+
+            <button type="submit">Upload Menu</button>
+
+        </form>
+
+    </div>
+
+    <!-- SHOW MENU IMAGE -->
+    {% if menu_image %}
+    <div class="card">
+
+        <h2>Current Menu 📸</h2>
+
+        <img src="{{ url_for('static', filename='uploads/' + menu_image) }}"
+             width="100%"
+             style="border-radius:10px;">
+
+    </div>
+    {% endif %}
+
+    <!-- STATS -->
+    <div class="card-container">
+
+        <div class="card-box">
+            <h3>Total</h3>
+            <p>{{ stats.total }}</p>
+        </div>
+
+        <div class="card-box">
+            <h3>Pending</h3>
+            <p>{{ stats.pending }}</p>
+        </div>
+
+        <div class="card-box">
+            <h3>Approved</h3>
+            <p>{{ stats.approved }}</p>
+        </div>
+
+        <div class="card-box">
+            <h3>Served</h3>
+            <p>{{ stats.served }}</p>
+        </div>
+
+    </div>
+
+    <!-- DASHBOARD OVERVIEW -->
+    <div class="card">
+
+        <h3>Dashboard Overview 📊</h3>
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+
+            <div style="background:orange; padding:10px; color:white; border-radius:8px;">
+                Pending: {{ stats.pending }}
+            </div>
+
+            <div style="background:green; padding:10px; color:white; border-radius:8px;">
+                Approved: {{ stats.approved }}
+            </div>
+
+            <div style="background:blue; padding:10px; color:white; border-radius:8px;">
+                Served: {{ stats.served }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FILTER -->
+    <div class="card">
+
+        <form method="GET" style="display:flex; gap:10px;">
+
+            <input type="text" name="search" placeholder="Search Employee 🔍">
+
+            <select name="status">
+                <option value="All">All</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+            </select>
+
+            <button type="submit">Filter</button>
+
+        </form>
+
+    </div>
+
+    <!-- EXPORT -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin:15px 0;">
+        <h3>Food Distribution</h3>
+        <a href="/export" class="button">Export Excel 📊</a>
+    </div>
+
+    <!-- TABLE -->
+    <div class="card">
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Employee</th>
+                <th>Meal</th>
+                <th>Meal Date</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Served</th>
+                <th>Action</th>
+            </tr>
+
+            {% for r in data %}
+            <tr>
+                <td>{{ r[0] }}</td>
+                <td>{{ r[1] }}</td>
+                <td>{{ r[2] }}</td>
+                <td>{{ r[3] }}</td>
+                <td>{{ r[4] }}</td>
+                <td>{{ r[5] }}</td>
+                <td>{{ r[6] }}</td>
+                <td>{{ r[7] }}</td>
+                <td>
+                    <a class="button" href="/serve/{{ r[0] }}">Mark Served</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+function toggleDark() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

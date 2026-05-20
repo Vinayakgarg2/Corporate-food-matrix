@@ -1,0 +1,167 @@
+body {
+    font-family: 'Segoe UI', Arial;
+    margin: 0;
+    background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+    background: rgb(99, 99, 235) !important;
+
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 25px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* CONTAINER */
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+/* CARD DESIGN */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #2575fc;
+}
+
+/* BUTTON */
+button, .button {
+    background: linear-gradient(90deg, #ff512f, #dd2476);
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+button:hover, .button:hover {
+    transform: scale(1.05);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: #2575fc;
+    color: white;
+    padding: 12px;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    background: #fff;
+}
+
+tr:nth-child(even) td {
+    background: #f3f6ff;
+}
+
+/* BADGES */
+.badge {
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+}
+
+.pending { background: orange; }
+.approved { background: green; }
+.served { background: blue; }
+
+form input, form select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    flex: 1;
+}
+
+form {
+    align-items: center;
+}
+
+.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark .card {
+    background: #1e1e1e;
+    color: white;
+}
+
+.dark table td,
+.dark table th {
+    background: #2a2a2a;
+    color: white;
+}
+
+.button {
+    transition: 0.3s;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #2c3e50;
+    color: white;
+}
+
+.button {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #2980b9;
+}

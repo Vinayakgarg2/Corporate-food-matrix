@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="header">
+    Employee Dashboard 👨‍💼
+    <a href="/logout" class="button" style="float:right;">Logout</a>
+</div>
+
+<div class="container">
+
+    {% if menu_image %}
+
+<div class="card">
+
+    <h2>Weekly Menu 🍱</h2>
+
+    <img src="{{ url_for('static',
+             filename='uploads/' + menu_image) }}"
+         width="100%"
+         style="border-radius:10px;">
+
+</div>
+
+{% endif %}
+
+<div class="card">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div style="background:green;color:white;padding:10px;margin-bottom:10px;border-radius:5px;">
+              {{ msg }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="card">
+
+    <h2>Weekly Menu 🍱</h2>
+
+    <table>
+
+        <tr>
+            <th>Day</th>
+            <th>Meal</th>
+        </tr>
+
+        {% for m in menu %}
+
+        <tr>
+            <td>{{ m[1] }}</td>
+            <td>{{ m[2] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+    <form method="POST">
+
+        <select name="meal_type" id="meal_type" onchange="toggleDates()">
+
+            <option value="today">Today Meal</option>
+            <option value="monthly">Monthly Subscription</option>
+
+        </select>
+
+        <div id="single_date">
+            <input type="date" name="meal_date">
+        </div>
+
+        <div id="monthly_dates" style="display:none;">
+            <input type="date" name="start_date">
+            <input type="date" name="end_date">
+        </div>
+
+        <button type="submit">Submit Request</button>
+
+    </form>
+
+</div>
+
+</div>
+
+
+<script>
+
+function toggleDates(){
+
+    let m = document.getElementById("meal_type").value;
+
+    if(m === "monthly"){
+        document.getElementById("monthly_dates").style.display="block";
+        document.getElementById("single_date").style.display="none";
+    } else {
+        document.getElementById("monthly_dates").style.display="none";
+        document.getElementById("single_date").style.display="block";
+    }
+}
+
+</script>
+
+</body>
+</html>

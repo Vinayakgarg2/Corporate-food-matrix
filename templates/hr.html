@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HR Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+    HR Dashboard 👩‍💼
+
+    <a href="/logout" class="button" style="float:right;">
+        Logout
+    </a>
+
+</div>
+
+<div class="container">
+
+    {% if menu_image %}
+
+<div class="card">
+
+    <h2>Weekly Menu 🍱</h2>
+
+    <img src="{{ url_for('static',
+             filename='uploads/' + menu_image) }}"
+         width="100%"
+         style="border-radius:10px;">
+
+</div>
+
+{% endif %}
+
+    <!-- STATS -->
+    <div class="card-container">
+
+        <div class="card-box">
+            <h3>Total</h3>
+            <p>{{ stats.total }}</p>
+        </div>
+
+        <div class="card-box">
+            <h3>Pending</h3>
+            <p>{{ stats.pending }}</p>
+        </div>
+
+        <div class="card-box">
+            <h3>Approved</h3>
+            <p>{{ stats.approved }}</p>
+        </div>
+
+        <div class="card-box">
+            <h3>Served</h3>
+            <p>{{ stats.served }}</p>
+        </div>
+
+    </div>
+
+    <!-- FILTER -->
+    <div class="card">
+        <!-- FILTER -->
+<div class="card">
+
+    <!-- WEEKLY MENU -->
+    <h2>Weekly Menu 🍱</h2>
+
+    <table>
+
+        <tr>
+            <th>Day</th>
+            <th>Meal</th>
+        </tr>
+
+        {% for m in menu %}
+
+        <tr>
+            <td>{{ m[1] }}</td>
+            <td>{{ m[2] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br>
+
+    <!-- FILTER FORM -->
+    <form method="GET" style="display:flex; gap:10px;">
+
+        <input type="text"
+               name="search"
+               placeholder="Search Employee">
+
+        <select name="status">
+            <option value="All">All</option>
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+        </select>
+
+        <button type="submit">Filter</button>
+
+    </form>
+
+</div>
+
+        <form method="GET" style="display:flex; gap:10px;">
+
+            <input type="text"
+                   name="search"
+                   placeholder="Search Employee">
+
+            <select name="status">
+                <option value="All">All</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+            </select>
+
+            <button type="submit">Filter</button>
+
+        </form>
+
+    </div>
+
+    <!-- HEADER ROW -->
+    <div style="display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin:15px 0;">
+
+        <h3>Requests</h3>
+
+        <a href="/export" class="button">
+            Export Excel 📊
+        </a>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="card">
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Employee</th>
+                <th>Meal</th>
+                <th>Meal Date</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            {% for r in data %}
+
+            <tr>
+                <td>{{ r[0] }}</td>
+                <td>{{ r[1] }}</td>
+                <td>{{ r[2] }}</td>
+                <td>{{ r[3] }}</td>
+                <td>{{ r[4] }}</td>
+                <td>{{ r[5] }}</td>
+                <td>{{ r[6] }}</td>
+
+                <td>
+                    <a href="/approve/{{ r[0] }}"
+                       class="button">
+                        Approve
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>
